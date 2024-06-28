@@ -14,6 +14,7 @@ let dots = []; // Array to store Dots objects
 let ranFrameC; //random frame color 
 let cRand; //random color for background
 let rectH; //top border
+let numShapes; 
 
 //HOME PAGE HEADER
 let profileVid, vidSize; //ai video of me
@@ -55,7 +56,8 @@ function setup() {
   rectH = globeScale*0.25; 
   cRand = color(random(255), random(255), random(255));
   // Create multiple Dots objects and add them to the array
-  for (let i = 0; i < 800; i++) {
+  numShapes = random(10, 800);
+  for (let i = 0; i < numShapes; i++) {
     dots.push(new Dots());
   }
 
@@ -65,8 +67,10 @@ function setup() {
 }
 
 function draw() {
- background(50, 0.1);
+
+  background(50, 0.1);
   gradient(); 
+
   homePageInteraction(); 
 
   if(cursorHand){

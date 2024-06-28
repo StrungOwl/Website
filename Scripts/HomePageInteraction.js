@@ -1,9 +1,3 @@
-//Turn this into a data vis!
-//generative, and interactive ui, animate, sound, etc. 
-
-
-
-
 function homePageInteraction() {
   
   // Loop through the dots array and update/display each dot
@@ -15,10 +9,7 @@ function homePageInteraction() {
   
   //top border
   fill(255);
-
-  //TOP
   rect(0, 0, width, rectH);
-
 
 }
 
@@ -54,12 +45,24 @@ class Dots {
   }
   
   mouseMoved(){
+   
+    // Calculate the distance between the current dot position and the mouse position
+    let d = dist(this.x, this.y, mouseX, mouseY);
+    let amt = globeScale*0.3;
+    let moveAmt; 
+
+      moveAmt = (globeScale*0.005)
     
-       let d = dist(this.x, this.y, mouseX, mouseY);
-    if (d < 100 && (mouseX !== pmouseX || mouseY !== pmouseY)) { // Only move the dot if mouse is close and moving
+    console.log(numShapes);
+
+    // Check if the mouse is within 100/0.5 pixels of the dot and the mouse has moved
+    if (d < amt && (mouseX !== pmouseX || mouseY !== pmouseY)) { 
+      // Only move the dot if mouse is close and moving
+        // Calculate the angle from the dot to the mouse position
       let angle = atan2(this.y - mouseY, this.x - mouseX);
-      this.x += cos(angle) * 2;
-      this.y += sin(angle) * 2;
+      // Move the dot away from the mouse by 2 pixels in the calculated direction
+      this.x += cos(angle) * moveAmt; //use to be *2
+      this.y += sin(angle) * moveAmt;
     }
   }
 }
