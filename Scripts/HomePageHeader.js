@@ -30,7 +30,7 @@ function homeHeader() {
     let button = createButton(name);
     let buttonSize = globeScale * 0.07;
     let buttonY = vidY + buttonSize * 0.8;
-    let buttonX = vidX + vidSize * 1.6 + index * (width * 0.1);
+    let buttonX = (vidX + vidSize * 1.6) + index * (width * 0.1);
 
     button.size(buttonSize * 1.7, buttonSize); // Adjust size as
     button.position(buttonX, buttonY); // Adjust positioning as needed
@@ -50,10 +50,11 @@ function homeHeader() {
 
     // Mouse over effect
     button.mouseOver(() => {
+      button.style("cursor", "pointer");
       intervalId = setInterval(() => {
         button.style("background-color", orangeColors[colorIndex]);
         colorIndex = (colorIndex + 1) % orangeColors.length;
-      }, 100); // Change color every 100 milliseconds
+      }, 200); // Change color every 100 milliseconds
     });
 
     // Mouse out effect
@@ -69,3 +70,13 @@ function homeHeader() {
     }
   });
 }
+
+//HAM MENU -------------------
+const hamMenu = document.querySelector('.ham-menu');
+const offScreenMenu = document.querySelector('.off-screen-menu');
+
+
+hamMenu.addEventListener('click', () => {
+    hamMenu.classList.toggle('active');
+    offScreenMenu.classList.toggle('active');
+})
