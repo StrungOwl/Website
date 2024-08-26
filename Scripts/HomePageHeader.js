@@ -40,10 +40,25 @@ function homeHeader() {
     button.position(buttonX, buttonY); // Adjust positioning as needed
     let fontSize = buttonSize * 0.25;
     button.style("font-size", `${fontSize}px`); // Change button text size here
-    button.style("background-color", "white"); // Change button background color here
     button.style("font-family", "Space Grotesk"); // Change button text color here
-    //button.style("box-shadow", "0px 8px 8px rgba(0, 0, 0, 0.5)"); // Add drop shadow
+    // Set border properties
+    button.style("border", "4px solid grey"); // Set border width, style, and color
+    button.style("border-radius", "30px"); // Set border radius
     //buttons.push(button); // Add to buttons array for later use
+    
+    //Uses rgba
+    let col1 = color(random(255), random(255), random(255), 0.2);
+    let col2 = color(random(255), random(255), random(255), 0.2);
+      
+         // Change button color on hover
+          button.mouseOver(() => {
+            button.style("background-color", col1.toString());
+          });
+
+          button.mouseOut(() => {
+            button.style("background-color", col2.toString());
+          });
+
 
       // Add event listener to create a new canvas on button click
       button.mousePressed(() => {
@@ -51,5 +66,9 @@ function homeHeader() {
             interMediaOn = true;
           }
       });
+
+
     });
+
+
 }

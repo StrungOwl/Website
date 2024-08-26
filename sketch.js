@@ -61,8 +61,8 @@ function setup() {
   let h = windowHeight;
   
   canvas1 = createCanvas(w, h); //background canvas
+  canvas1.position(0, 0);
   globeScale = min(width, height);
-
 
   //BACKGROUND CANVAS------------------
   colorMode(HSB);
@@ -82,6 +82,8 @@ function setup() {
   vidY = globeScale * 0.03;
   vidSize = globeScale * 0.2;
 
+  homeHeader();
+
   //HAM MENU -------------------
   //x, y, size
   let hamSize = globeScale * 0.05;
@@ -96,7 +98,6 @@ function draw() {
     background(50, 0.1);
     gradient();
     homePageInteraction();
-    homeHeader();
       if (cursorHand) {
         if (mouseY >= rectH) {
           noCursor();
