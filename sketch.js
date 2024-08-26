@@ -5,6 +5,7 @@ let globeScale;
 
 //P5 Canvas
 let canvas1;
+let drawWhiteBack = false; // draw a white background to clear canvas
 
 //CANVAS BACKGROUND
 let showTracer = false;
@@ -35,14 +36,31 @@ let buttonNames = [
   "About",
 ];
 
-//HOME PAGE
-let homePageOn = true;
-
-//INTERMEDIA PAGE
+//PAGE BOOLEANS
+let homePageOn = true; 
 let interMediaOn = false;
+let aboutOn = false;
+let exhibitionsOn = false;
+let vrOn = false;
+let genOn = false;
+let installationOn = false;
+
+//ABOUT PAGE
+let maxW, maxH; //max width and height of text box
+let scrollBarTop, scrollBarBottom, scrollW, scrollH, scrollX, scrollY; //scroll bar top and bottom, 
+let showScroll = true;
+let aboutPageY;
+let num; //offset w and h
+let bevel; //bevel for text box
+let blueX;
+let blueY
+let blueW
+let blueH
+let txtSize
+let textSpacing
 
 //HOME BUTTON
-let homeIcon; 
+let homeIcon;
 let c = 0;
 
 function preload() {
@@ -52,14 +70,14 @@ function preload() {
   cursorHand = loadImage("Images/cursor.png");
 
   homeIcon = loadImage("Images/homeIcon.png");
-  
+
 }
 
 function setup() {
   //CANVAS -------------------
   let w = windowWidth;
   let h = windowHeight;
-  
+
   canvas1 = createCanvas(w, h); //background canvas
   canvas1.position(0, 0);
   globeScale = min(width, height);
@@ -77,12 +95,27 @@ function setup() {
     dots.push(new Dots(random(width), random(height)));
   }
 
-  //PROFILE VID/Buttons -------------------
+  //PROFILE VID/Buttons -------------------------------------
   vidX = globeScale * 0.05;
   vidY = globeScale * 0.03;
   vidSize = globeScale * 0.2;
 
   homeHeader();
+
+  //ABOUT PAGE -------------------------------------------------------
+  num = globeScale * 0.04; //offset of width and height
+  bevel = globeScale * 0.01;
+  blueX = width/2;
+  blueY = height/2;
+  blueW = globeScale * 1.2;
+  blueH = globeScale * 0.8;
+  aboutPageY = blueH + num*1.4; //about page text START POS
+  // Calculate the top and bottom of the scroll bar
+  scrollY = blueY - blueH * 0.5;
+  scrollBarTop = blueY - blueH * 0.35;
+  scrollBarBottom = blueY + blueH * 0.38;
+  txtSize = globeScale * 0.03;
+  textSpacing = globeScale * 0.04;
 
   //HAM MENU -------------------
   //x, y, size
@@ -94,58 +127,67 @@ function draw() {
 
 
   //HOME PAGE -------------------
-  if(homePageOn){
+  if (homePageOn) {
+    rectMode(CORNER);
     background(50, 0.1);
     gradient();
     homePageInteraction();
-      if (cursorHand) {
-        if (mouseY >= rectH) {
-          noCursor();
-          image(cursorHand, mouseX, mouseY, globeScale * 0.2, globeScale * 0.2);
-        } else {
-          cursor(ARROW);
-        }
-  }
+    if (cursorHand) {
+      if (mouseY >= rectH) {
+        noCursor();
+        image(cursorHand, mouseX, mouseY, globeScale * 0.2, globeScale * 0.2);
+      } else {
+        cursor(ARROW);
+      }
+    }
 
-  } 
+  } else {
+    c += 0.1;
+    c = c % 360;
+  }
 
 
   //INTERMEDIA PAGE -------------------
-  if(interMediaOn){
+  if (interMediaOn) {
     homePageOn = false;
     interMediaPage();
-    c += 0.1; 
-    c = c % 360;
+
+  }
+
+  //ABOUT PAGE -------------------
+  if (aboutOn) {
+    homePageOn = false;
+    aboutPage();
+    drawWhiteBack = false; 
+  }
+
+  //EXHIBITIONS PAGE -------------------
+  if (exhibitionsOn) {
+    homePageOn = false;
+    exhibitionsPage();
+  }
+
+  //VR PAGE -------------------
+  if (vrOn) {
+    homePageOn = false;
+    vrPage();
+  }
+
+  //GEN ART PAGE -------------------
+  if (genOn) {
+    homePageOn = false;
+    genArtPage();
+  }
+
+  //Installation PAGE -------------------
+  if (installationOn) {
+    homePageOn = false;
+    installationPage();
   }
 
   // hamMenu1.displayHam();
   // hamMenu1.interactHam();
 
- 
-}
-
-function interMediaPage(){
-  
-canvas1.position(0, 0); // Set the position of the canvas to the top left corner
-canvas1.style("z-index", "1"); // Set a high z-index value
- background(255);
- backButton(); 
 
 }
 
-function backButton() {
-  let x = width*0.05;
-  let y = height*0.1; 
-  let backSize =  globeScale * 0.1; 
-  let d = dist(mouseX, mouseY, x, y);
-  fill(c, 100, 100);
-  circle(x, y, backSize);
-
-  if(d < backSize && mouseIsPressed){
-    interMediaOn = false;
-    homePageOn = true;
-    canvas1.position(''); // Reset position
-    canvas1.style("z-index", ""); // Reset z-index
-  }
-  image(homeIcon, x, y, backSize, backSize);
-}

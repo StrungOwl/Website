@@ -64,6 +64,16 @@ function homeHeader() {
       button.mousePressed(() => {
           if(buttonNames[index] == "Intermedia"){
             interMediaOn = true;
+          } else if (buttonNames[index] == "About"){
+            aboutOn = true;
+          } else if (buttonNames[index] == "Exhibitions"){
+            exhibitionsOn = true;
+          } else if (buttonNames[index] == "VR"){
+            vrOn = true;
+          } else if (buttonNames[index] == "Generative Art"){
+            genOn = true;
+          } else if (buttonNames[index] == "Installation"){
+            installationOn = true;
           }
       });
 
