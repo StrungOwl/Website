@@ -14,13 +14,12 @@ function homePageInteraction() {
 }
 
 class Dots {
-  constructor() {
+  constructor(x, y) {
     this.angle = 0;
     this.angle2 = 0;
     this.xoff = 0;
     this.yoff = 1000000;
-    this.x = random(width);
-    this.y = random(height); 
+    this.pos = createVector(x, y); 
     this.s = random(0, 100);
     this.b = random(20,100); //brightness
     this.h = sin(this.angle);
@@ -32,7 +31,7 @@ class Dots {
     stroke(this.h, this.s, 80, 0.5);
     noStroke();
     fill(this.h, this.s, this.b, 0.5);
-    drawSacredGeometry(this.x, this.y, this.s); // Draw sacred geometry shape instead of circle
+    drawSacredGeometry(this.pos.x, this.pos.y, this.s); // Draw sacred geometry shape instead of circle
   }
 
   move() {
@@ -47,22 +46,19 @@ class Dots {
   mouseMoved(){
    
     // Calculate the distance between the current dot position and the mouse position
-    let d = dist(this.x, this.y, mouseX, mouseY);
+    let d = dist(this.pos.x, this.pos.y, mouseX, mouseY);
     let amt = globeScale*0.3;
     let moveAmt; 
 
-      moveAmt = (globeScale*0.005)
-    
-    console.log(numShapes);
-
+      moveAmt = (globeScale*0.005);
     // Check if the mouse is within 100/0.5 pixels of the dot and the mouse has moved
     if (d < amt && (mouseX !== pmouseX || mouseY !== pmouseY)) { 
       // Only move the dot if mouse is close and moving
         // Calculate the angle from the dot to the mouse position
-      let angle = atan2(this.y - mouseY, this.x - mouseX);
+      let angle = atan2(this.pos.y - mouseY, this.pos.x - mouseX);
       // Move the dot away from the mouse by 2 pixels in the calculated direction
-      this.x += cos(angle) * moveAmt; //use to be *2
-      this.y += sin(angle) * moveAmt;
+      this.pos.x += cos(angle) * moveAmt; //use to be *2
+      this.pos.y += sin(angle) * moveAmt;
     }
   }
 }
