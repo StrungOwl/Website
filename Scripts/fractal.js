@@ -44,10 +44,6 @@ function fractal(x, y, rX, rY) {
 
 function bladeMaker(len, theta) {
 
-    if(fractalOn){
-    
-    push();
-
     let strokeC = color(fractalColor, 50, 100, fractalAlpha);
     let strokeC2 = color(fractalColor, 50, 50, fractalAlpha);
     let circleS = globeScale * 0.008; //change size of circle
@@ -102,8 +98,5 @@ function bladeMaker(len, theta) {
 
 }
 
-pop(); 
 
-
-}
 

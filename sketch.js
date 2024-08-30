@@ -154,6 +154,7 @@ function draw() {
       } else {
         cursor(ARROW);
       }
+    }
 
       if (fractalOn) {
         fractal(width/2, height/1.6, 0, 0);
@@ -162,7 +163,7 @@ function draw() {
     } else {
       c += 0.1;
       c = c % 360;
-      fractalOn = false;
+      fractalOn = false;//turn off when home page is off
     }
 
 
@@ -207,7 +208,5 @@ function draw() {
     // hamMenu1.displayHam();
     // hamMenu1.interactHam();
 
-
-  }
 }
 
