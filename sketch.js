@@ -16,6 +16,14 @@ let cRand; //random color for background
 let rectH; //top border
 let numShapes;
 
+//FRACTAL 
+let maxLen;
+let minLen;
+let fractalOn = false;
+let ranNum; 
+let ranC;
+let fractalAlpha = 0; //alpha
+
 //HOME PAGE HEADER
 let profileVid; //ai video of me
 let sydText; //Header
@@ -37,7 +45,7 @@ let buttonNames = [
 ];
 
 //PAGE BOOLEANS
-let homePageOn = true; 
+let homePageOn = true;
 let interMediaOn = false;
 let aboutOn = false;
 let exhibitionsOn = false;
@@ -86,6 +94,13 @@ function setup() {
   colorMode(HSB);
   imageMode(CENTER);
 
+  //FRACTAL --------------------
+  maxLen = height * 0.2
+  minLen = maxLen * 0.2;
+  ranNum = random(0.01, 0.7);
+  ranC = color(random(360), random(100), random(50, 100), 0.5);
+
+
   //BACKGROUND ----------------------------------
   rectH = globeScale * 0.25;
   cRand = color(random(255), random(255), random(255));
@@ -105,11 +120,11 @@ function setup() {
   //ABOUT PAGE -------------------------------------------------------
   num = globeScale * 0.04; //offset of width and height
   bevel = globeScale * 0.01;
-  blueX = width/2;
-  blueY = height/2;
+  blueX = width / 2;
+  blueY = height / 2;
   blueW = globeScale * 1.2;
   blueH = globeScale * 0.8;
-  aboutPageY = blueH + num*1.4; //about page text START POS
+  aboutPageY = blueH + num * 1.4; //about page text START POS
   // Calculate the top and bottom of the scroll bar
   scrollY = blueY - blueH * 0.5;
   scrollBarTop = blueY - blueH * 0.35;
@@ -119,8 +134,8 @@ function setup() {
 
   //HAM MENU -------------------
   //x, y, size
-  let hamSize = globeScale * 0.05;
-  hamMenu1 = new HamMenu(width * 0.9 - hamSize / 2, height * 0.09, hamSize);
+  //let hamSize = globeScale * 0.05;
+  //hamMenu1 = new HamMenu(width * 0.9 - hamSize / 2, height * 0.09, hamSize);
 }
 
 function draw() {
@@ -139,55 +154,60 @@ function draw() {
       } else {
         cursor(ARROW);
       }
+
+      if (fractalOn) {
+        fractal(width/2, height/1.6, 0, 0);
+      }
+
+    } else {
+      c += 0.1;
+      c = c % 360;
+      fractalOn = false;
     }
 
-  } else {
-    c += 0.1;
-    c = c % 360;
+
+    //INTERMEDIA PAGE -------------------
+    if (interMediaOn) {
+      homePageOn = false;
+      interMediaPage();
+
+    }
+
+    //ABOUT PAGE -------------------
+    if (aboutOn) {
+      homePageOn = false;
+      aboutPage();
+      drawWhiteBack = false;
+    }
+
+    //EXHIBITIONS PAGE -------------------
+    if (exhibitionsOn) {
+      homePageOn = false;
+      exhibitionsPage();
+    }
+
+    //VR PAGE -------------------
+    if (vrOn) {
+      homePageOn = false;
+      vrPage();
+    }
+
+    //GEN ART PAGE -------------------
+    if (genOn) {
+      homePageOn = false;
+      genArtPage();
+    }
+
+    //Installation PAGE -------------------
+    if (installationOn) {
+      homePageOn = false;
+      installationPage();
+    }
+
+    // hamMenu1.displayHam();
+    // hamMenu1.interactHam();
+
+
   }
-
-
-  //INTERMEDIA PAGE -------------------
-  if (interMediaOn) {
-    homePageOn = false;
-    interMediaPage();
-
-  }
-
-  //ABOUT PAGE -------------------
-  if (aboutOn) {
-    homePageOn = false;
-    aboutPage();
-    drawWhiteBack = false; 
-  }
-
-  //EXHIBITIONS PAGE -------------------
-  if (exhibitionsOn) {
-    homePageOn = false;
-    exhibitionsPage();
-  }
-
-  //VR PAGE -------------------
-  if (vrOn) {
-    homePageOn = false;
-    vrPage();
-  }
-
-  //GEN ART PAGE -------------------
-  if (genOn) {
-    homePageOn = false;
-    genArtPage();
-  }
-
-  //Installation PAGE -------------------
-  if (installationOn) {
-    homePageOn = false;
-    installationPage();
-  }
-
-  // hamMenu1.displayHam();
-  // hamMenu1.interactHam();
-
-
 }
 

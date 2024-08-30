@@ -1,16 +1,39 @@
 function homePageInteraction() {
-  
+  if(homePageOn){
   // Loop through the dots array and update/display each dot
   for (let i = 0; i < dots.length; i++) {
     dots[i].move();
     dots[i].display();
     dots[i].mouseMoved(); 
+    dots[i].isOffscreen();
+  }
+
+  // Check if all dots are offscreen
+  areAllDotsOffscreen(dots);
+  //if they are off screen do something
+  if (areAllDotsOffscreen(dots)) {
+    console.log("All dots are offscreen");
+  } else {
+    console.log("Some dots are still onscreen");
   }
   
   //top border
   fill(255);
   rect(0, 0, width, rectH);
 
+}
+
+}
+
+//Check if all dots are offscreen
+function areAllDotsOffscreen(dots) {
+  for (let dot of dots) {
+    if (!dot.isOffscreen()) {
+      return false;
+    }
+  }
+  fractalOn = true;
+  return true;
 }
 
 class Dots {
@@ -60,7 +83,14 @@ class Dots {
       this.pos.x += cos(angle) * moveAmt; //use to be *2
       this.pos.y += sin(angle) * moveAmt;
     }
+
   }
+
+  //Check if the dot is offscreen
+  isOffscreen() {
+    return this.pos.x < 0 || this.pos.x > width || this.pos.y < rectH || this.pos.y > height;
+  }
+     
 }
 
 function drawSacredGeometry(x, y, size) {
