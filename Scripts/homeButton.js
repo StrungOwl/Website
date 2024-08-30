@@ -19,6 +19,8 @@ function backButton() {
       installationOn = false;
 
       homePageOn = true;
+      fractalOn = false;
+      pushHexagons(); 
 
       canvas1.position(''); // Reset position
       canvas1.style("z-index", ""); // Reset z-index

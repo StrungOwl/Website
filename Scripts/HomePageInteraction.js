@@ -1,3 +1,11 @@
+function pushHexagons(){ //In setup function
+  // Create multiple Dots objects and add them to the array
+  numShapes = random(10, 800);
+  for (let i = 0; i < numShapes; i++) {
+    dots.push(new Dots(random(width), random(height)));
+  }
+}
+
 function homePageInteraction() {
   if(homePageOn){
   // Loop through the dots array and update/display each dot
@@ -13,8 +21,10 @@ function homePageInteraction() {
   //if they are off screen do something
   if (areAllDotsOffscreen(dots)) {
     console.log("All dots are offscreen");
+    fractalOn = true;
   } else {
     console.log("Some dots are still onscreen");
+    fractalOn = false;
   }
   
   //top border
@@ -32,7 +42,6 @@ function areAllDotsOffscreen(dots) {
       return false;
     }
   }
-  fractalOn = true;
   return true;
 }
 
@@ -110,7 +119,7 @@ function drawSacredGeometry(x, y, size) {
 
 function gradient(){
   
-  c1 = color(255);
+  c1 = color(255, 0.1);
   c2 = color(63, 191, 191);
   
   for(let y=0; y<height; y++){

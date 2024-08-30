@@ -5,7 +5,7 @@ let fractalColor = 0; //color shift
 let fSpeed = 0; //speed of rotation
 
 function fractal(x, y, rX, rY) {
-    push(); 
+    push();
 
     //Create Shape -------------------------------------
 
@@ -29,73 +29,87 @@ function fractal(x, y, rX, rY) {
         pop();
     }
 
-    fSpeed += 0.006; //change over time
+    fSpeed += 0.005; //change over time
 
-    fractalColor += 1;
+    fractalColor += 0.5;
     fractalColor = fractalColor % 360;
 
     //ease in the fractal
-    fractalAlpha += 0.001;
-    if(fractalAlpha > 0.5){
+    fractalAlpha += 0.0001;
+    if (fractalAlpha > 0.5) {
         fractalAlpha += 0;
     }
-    pop(); 
+    pop();
 }
 
 function bladeMaker(len, theta) {
 
-    let strokeC = color(fractalColor, 50, 100, fractalAlpha);
-    let strokeC2 = color(fractalColor, 50, 50, fractalAlpha);
-    let circleS = globeScale * 0.008; //change size of circle
+    let strokeC = color(fractalColor, ranSat, ranBright, fractalAlpha);
+    let strokeC2 = color(fractalColor, ranSat2, ranBright2, fractalAlpha);
+    let circleS = globeScale * 0.008; // Change size of circle
 
+    circleS = map(len, maxLen, minLen, circleS, 0);
+    // Stroke weight change
+    let sw = map(len, minLen, maxLen, globeScale * 0.003, globeScale * 0.001);
 
-    push();
-    translate(0, 0);
-    rotate(theta);
-    //strokeweight change
-    //change 10,1 this inside or outside
-    let sw = map(len, minLen, maxLen, 7, 1);
+    let x;
+    let y;
 
-    strokeWeight(sw);
-    stroke(strokeC); //change color with map
-    line(0, 0, 0, -len); //change position? 
-    noStroke();
-    fill(ranC); 
-    circle(0, -len, circleS); //change position?
-    //Change origin to end of segment
-    translate(0, -len);
-
-    //alter length 
-    if (len > minLen) {
-        bladeMaker(len * 0.6, theta * 1.1); //adjust later? 
+    if(triggerInteraction){
+        x = map(mouseX, 0, width, -globeScale * 0.1, globeScale * 0.1); // Change position?
+        y = map(mouseY, 0, height, -globeScale * 0.1, globeScale * 0.1); // Change position?
+    } else {
+        x = 0;
+        y = 0; 
     }
-    pop();
+    
 
-
-    //MAKE SECOND BRANCH-----------
     push();
-    translate(0, 0);
-    //reflect by flipping rotation
-    rotate(-theta);
-    //strokeweight change
-    //change 10,1 this inside or outside
-    sw = map(len, minLen, maxLen, 7, 1);
+    translate(x, y);
+    rotate(theta);
     strokeWeight(sw);
-    stroke(strokeC2); //change color with map
-    line(0, 0, 0, -len); //change position? 
+    stroke(strokeC); // Change color with map
+    line(0, 0, 0, -len); // Change position? 
     noStroke();
     fill(ranC);
-    circle(0, -len, circleS); //change position?
-
-    //Change origin to end of segment
+    fill(0);
+    circle(0, -len, circleS); // Change position?
+    // Change origin to end of segment
     translate(0, -len);
-   
-    //alter length 
+
+    // Alter length 
     if (len > minLen) {
-        bladeMaker(len * ranNum, theta * 1.1); //adjust later? 
+        bladeMaker(len * 0.6, theta * 1.1); // Adjust later? 
     }
     pop();
 
+    // MAKE SECOND BRANCH-----------
+    push();
+    translate(x, y);
+    // Reflect by flipping rotation
+    rotate(-theta);
+    // Stroke weight change
+    strokeWeight(sw);
+    stroke(strokeC2); // Change color with map
+    line(0, 0, 0, -len); // Change position? 
+    noStroke();
+    fill(ranC);
+    circle(0, -len, circleS); // Change position?
+
+    // Change origin to end of segment
+    translate(0, -len);
+
+    // Alter length 
+    if (len > minLen) {
+        // Generate noise value
+        let noiseVal = noise(xoff) * 0.5 + 0.5; // Noise value between 0.5 and 1
+        bladeMaker(len * noiseVal, theta * 1.1); // Adjust later? 
+    }
+
+    // Increment noise offset
+    xoff += 0.01;
+
+    pop();
 }
 
 

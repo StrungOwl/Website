@@ -17,12 +17,17 @@ let rectH; //top border
 let numShapes;
 
 //FRACTAL 
+let showFractalDebug = true;
 let maxLen;
 let minLen;
 let fractalOn = false;
 let ranNum; 
-let ranC;
+let ranC, ranSat, ranBright, ranSat2, ranBright2; 
+let ranCAlpha = 0; 
 let fractalAlpha = 0; //alpha
+//Fractals BladeMaker
+let xoff = 0; // Initialize noise offset
+let triggerInteraction = false;
 
 //HOME PAGE HEADER
 let profileVid; //ai video of me
@@ -98,12 +103,17 @@ function setup() {
   maxLen = height * 0.2
   minLen = maxLen * 0.2;
   ranNum = random(0.01, 0.7);
-  ranC = color(random(360), random(100), random(50, 100), 0.5);
+  ranC = color(random(360), random(100), random(50, 100), fractalAlpha);
+  ranSat = random(100);
+  ranBright = random(100);
+  ranSat2 = random(100);
+  ranBright2 = random(100);
 
 
   //BACKGROUND ----------------------------------
   rectH = globeScale * 0.25;
   cRand = color(random(255), random(255), random(255));
+
   // Create multiple Dots objects and add them to the array
   numShapes = random(10, 800);
   for (let i = 0; i < numShapes; i++) {
@@ -140,15 +150,26 @@ function setup() {
 
 function draw() {
 
+  //fractalOn = true; 
 
   //HOME PAGE -------------------
   if (homePageOn) {
     rectMode(CORNER);
+    if(!fractalOn){
     background(50, 0.1);
     gradient();
+    }
+
+    if (fractalOn) {
+      background(50, 0.01);
+      fractal(width/2, height/1.6, 0, 0);
+      
+    }
+
     homePageInteraction();
+    
     if (cursorHand) {
-      if (mouseY >= rectH) {
+      if (mouseY >= rectH && !fractalOn){
         noCursor();
         image(cursorHand, mouseX, mouseY, globeScale * 0.2, globeScale * 0.2);
       } else {
@@ -156,22 +177,22 @@ function draw() {
       }
     }
 
-      if (fractalOn) {
-        fractal(width/2, height/1.6, 0, 0);
-      }
-
     } else {
       c += 0.1;
       c = c % 360;
       fractalOn = false;//turn off when home page is off
     }
 
+    // fractalOn = true; 
+    // homePageOn = false;
+   
+
+
 
     //INTERMEDIA PAGE -------------------
     if (interMediaOn) {
       homePageOn = false;
       interMediaPage();
-
     }
 
     //ABOUT PAGE -------------------
@@ -207,6 +228,12 @@ function draw() {
 
     // hamMenu1.displayHam();
     // hamMenu1.interactHam();
+
+}
+
+function mousePressed() {
+
+    triggerInteraction = !triggerInteraction;
 
 }
 
