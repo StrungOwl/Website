@@ -98,6 +98,7 @@ function setup() {
   //BACKGROUND CANVAS------------------
   colorMode(HSB);
   imageMode(CENTER);
+  background(255); 
 
   //FRACTAL --------------------
   maxLen = height * 0.2
@@ -114,11 +115,7 @@ function setup() {
   rectH = globeScale * 0.25;
   cRand = color(random(255), random(255), random(255));
 
-  // Create multiple Dots objects and add them to the array
-  numShapes = random(10, 800);
-  for (let i = 0; i < numShapes; i++) {
-    dots.push(new Dots(random(width), random(height)));
-  }
+  pushHexagons(); 
 
   //PROFILE VID/Buttons -------------------------------------
   vidX = globeScale * 0.05;
