@@ -3,6 +3,7 @@ function homeHeader() {
   let container = select("main");
 
   //parent vid to main html element so it shows at top of screen
+  if(loadVideo){
   profileVid.parent(container);
   profileVid.size(vidSize, vidSize);
   profileVid.position(vidX, vidY);
@@ -18,6 +19,7 @@ function homeHeader() {
   profileVid.mouseOut(() => {
     profileVid.pause();
   });
+}
 
   //HOME PAGE BUTTONS ----------------
   
