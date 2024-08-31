@@ -31,6 +31,7 @@ let triggerInteraction = false;
 
 //HOME PAGE HEADER
 let profileVid; //ai video of me
+let loadVideo = false;//need to wait for user interaction for video to load
 let sydText; //Header
 let h1FontSize, h2FontSize; //Header font sizes
 let hamMenu1; //Hamburger menu
@@ -79,7 +80,10 @@ let c = 0;
 function preload() {
 
   //PROFILE VIDEO ---------------------------
+  if(loadVideo){
   profileVid = createVideo(["Video/AI Profile Pic.mp4"]);
+  }
+
   cursorHand = loadImage("Images/cursor.png");
 
   homeIcon = loadImage("Images/homeIcon.png");
@@ -153,7 +157,7 @@ function draw() {
   if (homePageOn) {
     rectMode(CORNER);
     if(!fractalOn){
-    background(50, 0.1);
+    background(255, 0.1);
     gradient();
     }
 
@@ -231,6 +235,7 @@ function draw() {
 function mousePressed() {
 
     triggerInteraction = !triggerInteraction;
+    loadVideo = true; 
 
 }
 
