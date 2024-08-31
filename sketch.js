@@ -21,9 +21,9 @@ let showFractalDebug = true;
 let maxLen;
 let minLen;
 let fractalOn = false;
-let ranNum; 
-let ranC, ranSat, ranBright, ranSat2, ranBright2; 
-let ranCAlpha = 0; 
+let ranNum;
+let ranC, ranSat, ranBright, ranSat2, ranBright2;
+let ranCAlpha = 0;
 let fractalAlpha = 0; //alpha
 //Fractals BladeMaker
 let xoff = 0; // Initialize noise offset
@@ -31,7 +31,9 @@ let triggerInteraction = false;
 
 //HOME PAGE HEADER
 let profileVid; //ai video of me
+let container; //main html element
 let loadVideo = false;//need to wait for user interaction for video to load
+let videoLoaded = false; //video loaded
 let sydText; //Header
 let h1FontSize, h2FontSize; //Header font sizes
 let hamMenu1; //Hamburger menu
@@ -79,11 +81,6 @@ let c = 0;
 
 function preload() {
 
-  //PROFILE VIDEO ---------------------------
-  if(loadVideo){
-  profileVid = createVideo(["Video/AI Profile Pic.mp4"]);
-  }
-
   cursorHand = loadImage("Images/cursor.png");
 
   homeIcon = loadImage("Images/homeIcon.png");
@@ -102,7 +99,7 @@ function setup() {
   //BACKGROUND CANVAS------------------
   colorMode(HSB);
   imageMode(CENTER);
-  background(255); 
+  background(255);
 
   //FRACTAL --------------------
   maxLen = height * 0.2
@@ -119,7 +116,7 @@ function setup() {
   rectH = globeScale * 0.25;
   cRand = color(random(255), random(255), random(255));
 
-  pushHexagons(); 
+  pushHexagons();
 
   //PROFILE VID/Buttons -------------------------------------
   vidX = globeScale * 0.05;
@@ -151,26 +148,44 @@ function setup() {
 
 function draw() {
 
+  //PROFILE VIDEO ---------------------------
+  if (loadVideo) {
+    profileVid = createVideo(["Video/AI Profile Pic.mp4"]);
+    videoLoaded = true;
+    loadVideo = false;
+  }
+
+  if (videoLoaded) {
+    showVideo();
+  }
+
   //fractalOn = true; 
 
-  //HOME PAGE -------------------
+  //HOME PAGE ------------------------------
   if (homePageOn) {
     rectMode(CORNER);
-    if(!fractalOn){
-    background(255, 0.1);
-    gradient();
+    if (!fractalOn) {
+      background(255, 0.1);
+      gradient();
     }
 
     if (fractalOn) {
       background(50, 0.01);
-      fractal(width/2, height/1.6, 0, 0);
-      
+      fractal(width / 2, height / 1.6, 0, 0);
+
     }
 
     homePageInteraction();
-    
+
+    //SHOW TEXT
+    if(!videoLoaded){
+      fill(0);
+      textSize(globeScale * 0.03);
+      text("Meet\nthe\nArtist", vidX, vidY + vidSize/3);
+    }
+
     if (cursorHand) {
-      if (mouseY >= rectH && !fractalOn){
+      if (mouseY >= rectH && !fractalOn) {
         noCursor();
         image(cursorHand, mouseX, mouseY, globeScale * 0.2, globeScale * 0.2);
       } else {
@@ -178,64 +193,67 @@ function draw() {
       }
     }
 
-    } else {
-      c += 0.1;
-      c = c % 360;
-      fractalOn = false;//turn off when home page is off
-    }
+  } else {
+    c += 0.1;
+    c = c % 360;
+    fractalOn = false;//turn off when home page is off
+  }
 
-    // fractalOn = true; 
-    // homePageOn = false;
-   
-
+  // fractalOn = true; 
+  // homePageOn = false;
 
 
-    //INTERMEDIA PAGE -------------------
-    if (interMediaOn) {
-      homePageOn = false;
-      interMediaPage();
-    }
+  //INTERMEDIA PAGE -------------------
+  if (interMediaOn) {
+    homePageOn = false;
+    interMediaPage();
+  }
 
-    //ABOUT PAGE -------------------
-    if (aboutOn) {
-      homePageOn = false;
-      aboutPage();
-      drawWhiteBack = false;
-    }
+  //ABOUT PAGE -------------------
+  if (aboutOn) {
+    homePageOn = false;
+    aboutPage();
+    drawWhiteBack = false;
+  }
 
-    //EXHIBITIONS PAGE -------------------
-    if (exhibitionsOn) {
-      homePageOn = false;
-      exhibitionsPage();
-    }
+  //EXHIBITIONS PAGE -------------------
+  if (exhibitionsOn) {
+    homePageOn = false;
+    exhibitionsPage();
+  }
 
-    //VR PAGE -------------------
-    if (vrOn) {
-      homePageOn = false;
-      vrPage();
-    }
+  //VR PAGE -------------------
+  if (vrOn) {
+    homePageOn = false;
+    vrPage();
+  }
 
-    //GEN ART PAGE -------------------
-    if (genOn) {
-      homePageOn = false;
-      genArtPage();
-    }
+  //GEN ART PAGE -------------------
+  if (genOn) {
+    homePageOn = false;
+    genArtPage();
+  }
 
-    //Installation PAGE -------------------
-    if (installationOn) {
-      homePageOn = false;
-      installationPage();
-    }
+  //Installation PAGE -------------------
+  if (installationOn) {
+    homePageOn = false;
+    installationPage();
+  }
 
-    // hamMenu1.displayHam();
-    // hamMenu1.interactHam();
+  // hamMenu1.displayHam();
+  // hamMenu1.interactHam();
+
+  //console.log(loadVideo, videoLoaded);
 
 }
 
 function mousePressed() {
 
+  if (fractalOn) {
     triggerInteraction = !triggerInteraction;
-    loadVideo = true; 
+  }
+
+  loadVideo = true;
 
 }
 
