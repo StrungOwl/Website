@@ -11,6 +11,7 @@ function backButton() {
 
   
     if(d < backSize && mouseIsPressed){
+
       interMediaOn = false;
       aboutOn = false;
       exhibitionsOn = false;

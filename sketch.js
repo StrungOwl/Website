@@ -95,8 +95,8 @@ function preload() {
 
   homeIcon = loadImage("Images/homeIcon.png");
 
-  fig1 = loadImage("Images/VR/figure in flowers.png");
-  fig2 = loadImage("Images/VR/figure with bent leg.png");
+  fig1 = loadImage("Images/VR/figure1.png");
+  fig2 = loadImage("Images/VR/figure2.png");
 
 
 }
