@@ -30,6 +30,7 @@ let xoff = 0; // Initialize noise offset
 let triggerInteraction = false;
 
 //HOME PAGE HEADER
+let arrow;
 let profileVid; //ai video of me
 let container; //main html element
 let loadVideo = false;//need to wait for user interaction for video to load
@@ -40,6 +41,13 @@ let hamMenu1; //Hamburger menu
 let verticleButtonOn = false;
 let buttonX, buttonY, buttonSize;
 let vidX, vidY, vidSize;
+
+//VR PAGE 
+let balloonVid, plantVid; 
+let fig1, fig2, fig3; //VR images
+let fig1Size, fig2Size, fig3Size; //VR image sizes
+let dist1; //figure in flowers distance
+let makePhotoBig = false; //make photo big
 
 //BUTTONS ON HOME PAGE
 let buttons = [];
@@ -83,7 +91,13 @@ function preload() {
 
   cursorHand = loadImage("Images/cursor.png");
 
+  arrow = loadImage("Images/arrow.png");
+
   homeIcon = loadImage("Images/homeIcon.png");
+
+  fig1 = loadImage("Images/VR/figure in flowers.png");
+  fig2 = loadImage("Images/VR/figure with bent leg.png");
+
 
 }
 
@@ -140,6 +154,11 @@ function setup() {
   txtSize = globeScale * 0.03;
   textSpacing = globeScale * 0.04;
 
+  //VR PAGE ------------------------------------------------------------------
+  fig2Size = globeScale*0.44; 
+  fig2.resize(fig2Size, 0);
+
+
   //HAM MENU -------------------
   //x, y, size
   //let hamSize = globeScale * 0.05;
@@ -172,16 +191,25 @@ function draw() {
     if (fractalOn) {
       background(50, 0.01);
       fractal(width / 2, height / 1.6, 0, 0);
-
     }
 
     homePageInteraction();
 
-    //SHOW TEXT
+    //SHOW TEXT FOR PROFILE VID ---------------------------------------------
     if(!videoLoaded){
+      let wordsX = vidX + vidSize/2;
+      let wordsY = vidY + vidSize/2;
+      let offset = globeScale * 0.01;
+      fill(50, 0.2);
+      circle(wordsX, wordsY, vidSize*0.9);
       fill(0);
+      stroke(0);
+      strokeWeight(globeScale * 0.002);
+      textLeading(globeScale * 0.034);
+      textAlign(CENTER, CENTER);  
       textSize(globeScale * 0.03);
-      text("Meet\nthe\nArtist", vidX, vidY + vidSize/3);
+      text("Meet\nthe\nArtist", wordsX - offset, wordsY);
+      image(arrow, vidX + vidSize*0.75, wordsY, globeScale * 0.05, globeScale * 0.05);
     }
 
     if (cursorHand) {
@@ -253,7 +281,16 @@ function mousePressed() {
     triggerInteraction = !triggerInteraction;
   }
 
-  loadVideo = true;
+  if(!videoLoaded && mouseX >= vidX && mouseX <= vidX + vidSize && mouseY >= vidY && mouseY <= vidY + vidSize){
+    loadVideo = true;
+  }
+
+  //VR PAGE -------------------
+  if(vrOn){
+  if(dist1 < fig1Size/4){
+    makePhotoBig = !makePhotoBig;
+  }
+  }
 
 }
 
