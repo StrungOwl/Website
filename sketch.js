@@ -65,7 +65,7 @@ let homePageOn = true;
 let interMediaOn = false;
 let aboutOn = false;
 let exhibitionsOn = false;
-let vrOn = false;
+let vrOn = true;
 let genOn = false;
 let installationOn = false;
 
@@ -97,6 +97,10 @@ function preload() {
 
   fig1 = loadImage("Images/VR/figure1.png");
   fig2 = loadImage("Images/VR/figure2.png");
+  fig3 = loadImage("Images/VR/figure3.png");
+  if(vrOn){
+    balloonVid = createVideo(["Images/VR/balloonVid.mp4"]);
+  }
 
 
 }
@@ -144,7 +148,7 @@ function setup() {
   bevel = globeScale * 0.01;
   blueX = width / 2;
   blueY = height / 2;
-  blueW = globeScale * 1.2;
+  blueW = width * 0.8;
   blueH = globeScale * 0.8;
   aboutPageY = blueH + num * 1.4; //about page text START POS
   // Calculate the top and bottom of the scroll bar
@@ -157,7 +161,6 @@ function setup() {
   //VR PAGE ------------------------------------------------------------------
   fig2Size = globeScale*0.44; 
   fig2.resize(fig2Size, 0);
-
 
   //HAM MENU -------------------
   //x, y, size
@@ -293,4 +296,5 @@ function mousePressed() {
   }
 
 }
+
 

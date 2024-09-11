@@ -42,16 +42,19 @@ function aboutPage() {
         maxW = blueW;
         maxH = globeScale * 1.45;
 
+
         text(artistStatement, blueX, aboutPageY, maxW * 0.9, maxH);
 
-        //scrollIndicator();
+        if(blueW < globeScale){
+        scrollIndicator();
 
-        // if (scrollY <= scrollBarTop) { //move back to org position
-        //     aboutPageY = lerp(aboutPageY, blueY + blueH / 1.3, 0.5);
-        // }
-        // if (scrollY >= scrollBarBottom) {
-        //     aboutPageY = lerp(aboutPageY, blueY - blueH, 0.5);
-        // }
+        if (scrollY <= scrollBarTop) { //move back to org position
+            aboutPageY = lerp(aboutPageY, blueY + blueH*0.5, 0.5); //y pos of text top
+        }
+        if (scrollY >= scrollBarBottom) {
+            aboutPageY = lerp(aboutPageY, blueY - blueH*0.5, 0.5);
+        }
+    }
 
         backButton();
 
@@ -67,59 +70,59 @@ function aboutPage() {
 
 }
 
-// function mouseWheel(event) {
-//     if (aboutOn) {
+function mouseWheel(event) {
+    if (aboutOn && blueW < globeScale) {
 
-//         if (event.delta < 0) { //if it's a negative number
+        if (event.delta < 0) { //if it's a negative number
 
-//             scrollY -= globeScale * 0.038; //scroll indicator
+            scrollY -= globeScale * 0.038; //scroll indicator
 
-//             if (scrollY <= scrollBarTop) { //loop, maxH is blueH
-//                 //stop moving
-//                 aboutPageY += 0;
-//                 //aboutPageY = lerp(aboutPageY, blueY + blueH/2.7, 0.1);
+            if (scrollY <= scrollBarTop) { //loop, maxH is blueH
+                //stop moving
+                aboutPageY += 0;
+                //aboutPageY = lerp(aboutPageY, blueY + blueH/2.7, 0.1);
 
-//             } else {
-//                 aboutPageY += globeScale * 0.1; //scroll
-//             }
+            } else {
+                aboutPageY += globeScale * 0.1; //scroll
+            }
 
-//         } else { //if it's a positive number
+        } else { //if it's a positive number
 
-//             scrollY += globeScale * 0.02; //scroll indicator
-
-
-//             if (scrollY >= scrollBarBottom) {
-//                 //stop moving
-//                 aboutPageY += 0;
-//             } else {
-//                 aboutPageY -= globeScale * 0.05;
-
-//             }
+            scrollY += globeScale * 0.02; //scroll indicator
 
 
-//         }
+            if (scrollY >= scrollBarBottom) {
+                //stop moving
+                aboutPageY += 0;
+            } else {
+                aboutPageY -= globeScale * 0.05;
 
-//         return false;
+            }
 
-//     }
-// }
 
-// function scrollIndicator() {
-//  if(aboutOn){
-//     scrollW = globeScale * 0.015;
-//     scrollH = blueH * 0.2;
+        }
 
-//     // Constrain scrollY to stay within the scroll bar
-//     scrollY = constrain(scrollY, scrollBarTop, scrollBarBottom);
+        return false;
 
-//     noStroke();
-//     fill(0);
-//     rect(blueX + blueW / 2, blueY, scrollW, blueH, 0, 0, 0, 0); //scroll bar
-//     fill(255);
-//     rect(blueX + blueW / 2, scrollY, scrollW * 0.3, scrollH);
-//  }
+    }
+}
 
-// }
+function scrollIndicator() {
+    if (aboutOn) {
+        scrollW = globeScale * 0.015;
+        scrollH = blueH * 0.2;
+
+        // Constrain scrollY to stay within the scroll bar
+        scrollY = constrain(scrollY, scrollBarTop, scrollBarBottom);
+
+        noStroke();
+        fill(0);
+        rect(blueX + blueW / 2, blueY, scrollW, blueH, 0, 0, 0, 0); //scroll bar
+        fill(255);
+        rect(blueX + blueW / 2, scrollY, scrollW * 0.3, scrollH);
+    }
+
+}
 
 
 
