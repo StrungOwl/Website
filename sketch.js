@@ -43,15 +43,11 @@ let buttonX, buttonY, buttonSize;
 let vidX, vidY, vidSize;
 
 //VR PAGE 
-let vrImagesLoaded = false; //VR images loaded
 let balloonVid, plantVid; 
 let fig1, fig2, fig3; //VR images
 let fig1Size, fig2Size, fig3Size; //VR image sizes
-let dist1, dist2, dist3; //figure in flowers distance
-let makePhotoBig1 = false; //make photo big
-let makePhotoBig2 = false; //make photo big
-let makePhotoBig3 = false; //make photo big
-
+let dist1; //figure in flowers distance
+let makePhotoBig = false; //make photo big
 
 //BUTTONS ON HOME PAGE
 let buttons = [];
@@ -65,7 +61,7 @@ let buttonNames = [
 ];
 
 //PAGE BOOLEANS
-let homePageOn = false;
+let homePageOn = true;
 let interMediaOn = false;
 let aboutOn = false;
 let exhibitionsOn = false;
@@ -102,6 +98,9 @@ function preload() {
   fig1 = loadImage("Images/VR/figure1.png");
   fig2 = loadImage("Images/VR/figure2.png");
   fig3 = loadImage("Images/VR/figure3.png");
+  if(vrOn){
+    balloonVid = createVideo(["Images/VR/balloonVid.mp4"]);
+  }
 
 
 }
@@ -160,7 +159,8 @@ function setup() {
   textSpacing = globeScale * 0.04;
 
   //VR PAGE ------------------------------------------------------------------
-
+  fig2Size = globeScale*0.44; 
+  fig2.resize(fig2Size, 0);
 
   //HAM MENU -------------------
   //x, y, size
@@ -291,13 +291,8 @@ function mousePressed() {
   //VR PAGE -------------------
   if(vrOn){
   if(dist1 < fig1Size/4){
-    makePhotoBig1 = !makePhotoBig1;
-  } else if (dist2 < fig2Size/4){
-    makePhotoBig2 = !makePhotoBig2;
-  } else if (dist3 < fig3Size/4){
-    makePhotoBig3 = !makePhotoBig3;
+    makePhotoBig = !makePhotoBig;
+  }
   }
 
 }
-}
-
