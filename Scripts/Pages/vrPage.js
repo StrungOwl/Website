@@ -31,7 +31,6 @@ function vrPage() {
     image(fig3, fig3X, fig3Y);
 
     noTint();
-    drawFrame(fig2X, fig2Y, fig2Size * 1.09, fig2Size * 0.98);
     image(fig2, fig2X, fig2Y);
 
     dist1 = dist(mouseX, mouseY, fig1X, fig1Y);
