@@ -65,7 +65,7 @@ let homePageOn = true;
 let interMediaOn = false;
 let aboutOn = false;
 let exhibitionsOn = false;
-let vrOn = true;
+let vrOn = false;
 let genOn = false;
 let installationOn = false;
 
