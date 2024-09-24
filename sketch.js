@@ -48,6 +48,7 @@ let fig1, fig2, fig3; //VR images
 let fig1Size, fig2Size, fig3Size; //VR image sizes
 let dist1; //figure in flowers distance
 let makePhotoBig = false; //make photo big
+let vrPageContent, galleryItem; //HTML content
 
 //BUTTONS ON HOME PAGE
 let buttons = [];
@@ -98,10 +99,6 @@ function preload() {
   fig1 = loadImage("Images/VR/figure1.png");
   fig2 = loadImage("Images/VR/figure2.png");
   fig3 = loadImage("Images/VR/figure3.png");
-  if(vrOn){
-    balloonVid = createVideo(["Images/VR/balloonVid.mp4"]);
-  }
-
 
 }
 
@@ -161,6 +158,8 @@ function setup() {
   //VR PAGE ------------------------------------------------------------------
   fig2Size = globeScale*0.44; 
   fig2.resize(fig2Size, 0);
+  vrPageContent = select('#vrPageContent');
+  galleryItem = selectAll('.gallery-item'); //need select all
 
   //HAM MENU -------------------
   //x, y, size
@@ -257,6 +256,10 @@ function draw() {
   if (vrOn) {
     homePageOn = false;
     vrPage();
+    vrPageContent.style('display', 'flex');
+
+  } else {
+    vrPageContent.style('display', 'none');
   }
 
   //GEN ART PAGE -------------------
@@ -296,3 +299,5 @@ function mousePressed() {
   }
 
 }
+
+

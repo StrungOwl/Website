@@ -96,7 +96,6 @@ function mouseWheel(event) {
                 aboutPageY += 0;
             } else {
                 aboutPageY -= globeScale * 0.05;
-
             }
 
 

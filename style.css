@@ -13,7 +13,43 @@ html, body {
     margin: 0;
   }
 
+  /* VR PAGE */
+  #vrPageContent {
+    display: none;
+    position: relative;
+    overflow-y: auto;
+    height: 100vh; /* Set the height to the full viewport height */
+    z-index: 2;
 
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.gallery-item {
+    margin: 20px;
+    border: 2vh solid #000; /* Frame border color */
+    border-radius: 3vh;
+    padding: 0px;
+    background-color: #fff; /* Frame color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual */
+}
+
+.gallery-item img {
+    max-width: 100%;
+    border-radius: 1vh;
+    height: auto;
+    display: block;
+}
+
+.gallery-item img:hover {
+    opacity: 0.4;
+}
 
  
   
