@@ -1,30 +1,50 @@
 function vrPage() {
-     canvas1.position(0, 0); // Set the position of the canvas to the top left corner
-     canvas1.style("z-index", "1"); // Set a high z-index value
-     background(255);
-     backButton();
-   // Attach mousePressed event to each gallery item
-   galleryItem.forEach(item => {
-    item.mousePressed(() => {
-        makePhotoBig = !makePhotoBig;
-        resizePhotos(makePhotoBig);
-    });
-});
+    canvas1.position(0, 0); // Set the position of the canvas to the top left corner
+    canvas1.style("z-index", "1"); // Set a high z-index value
+    background(40, 10, 90); // tan
+    backButton();
 
+    // Select all elements with the class 'gallery-item'
+    let galleryItems = selectAll('.gallery-item');
+
+    // Attach mousePressed event to each gallery item
+    galleryItems.forEach(item => {
+        item.mousePressed(function () {
+            let media = this.elt.querySelector('img, video'); // Get the image element within the clicked gallery item
+            makePhotoBig = !makePhotoBig;
+            resizePhoto(media, makePhotoBig);
+            });
+
+            //STOP VIDEOS THAT ARE NOT ON PAGE
+            let videos = selectAll('#interMediaContent video, #installPageContent video');
+            videos.forEach(video => {
+                video.pause(); 
+                if(profileVid){
+                profileVid.pause(); 
+                }
+            });
+            
+    });
 
 }
 
+function resizePhoto(media, makeBig) {
+    
+    if (makeBig) {
+        media.style.width = '100vw';
+        media.style.height = 'auto';
+        media.style.opacity = 1;
+    } else {
+        media.style.width = '100%';
+        media.style.height = 'auto';
+       
+        media.addEventListener('mouseover', function() {
+            media.style.opacity = 0.3;
+            media.style.transition = 'opacity 0.3s ease';
+        });
 
-
-function resizePhotos(makeBig) {
-    let images = selectAll('.gallery-item img');
-    images.forEach(img => {
-        if (makeBig) {
-            img.style('width', '100vw');
-            img.style('height', 'auto');
-        } else {
-            img.style('width', '100%');
-            img.style('height', 'auto');
-        }
-    });
+        media.addEventListener('mouseout', function() {
+            media.style.opacity = 1;
+        });
+    }
 }

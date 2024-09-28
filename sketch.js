@@ -1,3 +1,6 @@
+//THINGS I'M DOING: FINISH BANNER THEN PAGE CONTENT, make videos smaller
+//NEED TO MAKE MOBILE READY 
+
 //GOAL: Create a fun, playground, interactive artist website.
 //Just do whatever you want
 
@@ -43,12 +46,18 @@ let buttonX, buttonY, buttonSize;
 let vidX, vidY, vidSize;
 
 //VR PAGE 
-let balloonVid, plantVid; 
+let balloonVid, plantVid;
 let fig1, fig2, fig3; //VR images
 let fig1Size, fig2Size, fig3Size; //VR image sizes
 let dist1; //figure in flowers distance
 let makePhotoBig = false; //make photo big
 let vrPageContent, galleryItem; //HTML content
+
+//INTERMEDIA PAGE
+let interPageContent; //HTML content
+
+//INSTALL PAGE
+let installPageContent; //HTML content
 
 //BUTTONS ON HOME PAGE
 let buttons = [];
@@ -88,7 +97,17 @@ let textSpacing
 let homeIcon;
 let c = 0;
 
+//BANNER
+let bannerTextSize, textLength; //the size and length 
+let textX;
+let textSpeed; //movement 
+let bannerText;//the words on the banner
+let startX; //start position of the text
+let showBannerOn = false; //show banner
+
+
 function preload() {
+
 
   cursorHand = loadImage("Images/cursor.png");
 
@@ -152,38 +171,64 @@ function setup() {
   scrollY = blueY - blueH * 0.5;
   scrollBarTop = blueY - blueH * 0.35;
   scrollBarBottom = blueY + blueH * 0.38;
-  txtSize = globeScale * 0.03;
+  txtSize = globeScale * 0.025;
   textSpacing = globeScale * 0.04;
 
   //VR PAGE ------------------------------------------------------------------
-  fig2Size = globeScale*0.44; 
+  fig2Size = globeScale * 0.44;
   fig2.resize(fig2Size, 0);
   vrPageContent = select('#vrPageContent');
   galleryItem = selectAll('.gallery-item'); //need select all
+
+  //INTERMEDIA PAGE ----------------------------------------------------------
+  interPageContent = select('#interPageContent');
+
+  //INSTALLATION PAGE 
+  installPageContent = select('#installPageContent');
 
   //HAM MENU -------------------
   //x, y, size
   //let hamSize = globeScale * 0.05;
   //hamMenu1 = new HamMenu(width * 0.9 - hamSize / 2, height * 0.09, hamSize);
+
+  //BANNER --------------------------------------------------------------------
+  textSpeed = globeScale * 0.003;
+  bannerTextSize = globeScale * 0.05;
+  bannerText = "Welcome to my experimental site! Built with HTML, CSS, and p5.js. You may find bugs as I fine-tune it, but please revisit to watch it evolve. Interact and enjoy!"
+  textLength = textWidth(bannerText); // Calculate the width of the text
+  startX = width*2; 
+  textX = startX;
+
 }
 
 function draw() {
 
-  //PROFILE VIDEO ---------------------------
-  if (loadVideo) {
-    profileVid = createVideo(["Video/AI Profile Pic.mp4"]);
-    videoLoaded = true;
-    loadVideo = false;
-  }
 
-  if (videoLoaded) {
-    showVideo();
-  }
 
   //fractalOn = true; 
 
   //HOME PAGE ------------------------------
   if (homePageOn) {
+
+    //TURN OFF OTHER VIDEOS ---------------------
+    //PAUSE OTHER VIDEOS
+    let videos = selectAll('#vrPageContent video, #interMediaContent video , #installPageContent video');
+    videos.forEach(video => {
+      video.pause();
+    });
+
+    //PROFILE VIDEO ---------------------------
+    if (loadVideo) {
+      profileVid = createVideo(["Video/AI Profile Pic.mp4"]);
+      videoLoaded = true;
+      loadVideo = false;
+    }
+
+    if (videoLoaded && homePageOn) {
+      showVideo();
+    }
+
+
     rectMode(CORNER);
     if (!fractalOn) {
       background(255, 0.1);
@@ -198,20 +243,8 @@ function draw() {
     homePageInteraction();
 
     //SHOW TEXT FOR PROFILE VID ---------------------------------------------
-    if(!videoLoaded){
-      let wordsX = vidX + vidSize/2;
-      let wordsY = vidY + vidSize/2;
-      let offset = globeScale * 0.01;
-      fill(50, 0.2);
-      circle(wordsX, wordsY, vidSize*0.9);
-      fill(0);
-      stroke(0);
-      strokeWeight(globeScale * 0.002);
-      textLeading(globeScale * 0.034);
-      textAlign(CENTER, CENTER);  
-      textSize(globeScale * 0.03);
-      text("Meet\nthe\nArtist", wordsX - offset, wordsY);
-      image(arrow, vidX + vidSize*0.75, wordsY, globeScale * 0.05, globeScale * 0.05);
+    if (!videoLoaded && !showBannerOn) {
+      showTextVid();
     }
 
     if (cursorHand) {
@@ -221,6 +254,13 @@ function draw() {
       } else {
         cursor(ARROW);
       }
+    }
+
+    //SHOW BANNER ----------------------------------------------------------------
+    if(showBannerOn){
+    showBanner();
+    } else if(textX <= - startX) {
+      showBannerOn = false; //turn off banner
     }
 
   } else {
@@ -237,6 +277,9 @@ function draw() {
   if (interMediaOn) {
     homePageOn = false;
     interMediaPage();
+    interPageContent.style('display', 'flex');
+  } else {
+    interPageContent.style('display', 'none');
   }
 
   //ABOUT PAGE -------------------
@@ -272,6 +315,9 @@ function draw() {
   if (installationOn) {
     homePageOn = false;
     installationPage();
+    installPageContent.style('display', 'flex');
+  } else {
+    installPageContent.style('display', 'none');
   }
 
   // hamMenu1.displayHam();
@@ -287,17 +333,59 @@ function mousePressed() {
     triggerInteraction = !triggerInteraction;
   }
 
-  if(!videoLoaded && mouseX >= vidX && mouseX <= vidX + vidSize && mouseY >= vidY && mouseY <= vidY + vidSize){
+  if (!videoLoaded && mouseX >= vidX && mouseX <= vidX + vidSize && mouseY >= vidY && mouseY <= vidY + vidSize) {
     loadVideo = true;
   }
 
-  //VR PAGE -------------------
-  if(vrOn){
-  if(dist1 < fig1Size/4){
-    makePhotoBig = !makePhotoBig;
-  }
+
+}
+
+//BANNER -----------------------------------------------------------------------
+
+function showBanner() {
+
+
+  canvas1.position(0, 0); // Set the position of the canvas to the top left corner
+  canvas1.style("z-index", "1"); // Set a high z-index value
+
+  //top border
+  noStroke();
+  fill(255, 0.1);
+  rect(0, 0, width, rectH);
+
+  textAlign(CENTER, CENTER);
+  textSize(bannerTextSize);
+  fill(0);
+  text(bannerText, textX, rectH / 2);
+
+  textX -= textSpeed;
+  if (textX <= - startX) {
+    textX = startX;
   }
 
+
+}
+
+//COMING SOON -------------------------------------------------------------------
+
+function comingSoon() {
+  minW = globeScale * 0.7;
+  minH = height * 0.5;
+  maxW = width * 0.9;
+  maxH = height * 0.9;
+
+  noStroke();
+
+
+  fill(c, 50, 100, 0.1);
+  ellipseWidth = map(mouseX, 0, width, minW, maxW);
+  ellipseHeight = map(mouseY, 0, height, minH, maxH);
+
+  ellipse(width / 2, height / 2, ellipseWidth, ellipseHeight);
+  fill(c, 80, 80);
+  textAlign(CENTER, CENTER);
+  textSize(globeScale * 0.1);
+  text('Coming Soon', width / 2, height / 2);
 }
 
 

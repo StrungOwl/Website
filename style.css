@@ -13,14 +13,13 @@ html, body {
     margin: 0;
   }
 
-  /* VR PAGE */
-  #vrPageContent {
+  /* VR PAGE ---------------------------------------------------------------------*/
+  #vrPageContent, #interPageContent, #installPageContent {
     display: none;
     position: relative;
     overflow-y: auto;
     height: 100vh; /* Set the height to the full viewport height */
     z-index: 2;
-
 }
 
 .gallery-container {
@@ -37,7 +36,8 @@ html, body {
     border-radius: 3vh;
     padding: 0px;
     background-color: #fff; /* Frame color */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1),
+                inset 0px 0 20px rgba(0, 0, 0, 0.5); /* Optional shadow for better visual */
 }
 
 .gallery-item img {
@@ -48,7 +48,20 @@ html, body {
 }
 
 .gallery-item img:hover {
-    opacity: 0.4;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item video {
+    max-width: 100%;
+    border-radius: 1vh;
+    height: auto;
+    display: block;
+}
+
+.gallery-item video:hover {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
 }
 
  

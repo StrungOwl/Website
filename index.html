@@ -3,21 +3,20 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <meta charset="utf-8" />
     <title>Syd's Dope Website</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-   
-    <header>
-    </header>
-    <main>
-    </main>
+    <header></header>
+    <main></main>
     <script src="Scripts/HomePageHeader.js"></script>
     <script src="sketch.js"></script>
     <script src="Scripts/HomePageInteraction.js"></script>
@@ -31,25 +30,62 @@
     <script src="Scripts/Pages/installationPage.js"></script>
     <script src="Scripts/Pages/intermediaPage.js"></script>
     <script src="Scripts/Pages/vrPage.js"></script>
-          
-    <!-- VR PAGE -->
+
+    <!-- VR PAGE ----------------------------------------------------------------------------------->
     <div id="vrPageContent">
       <div class="gallery-container">
-          <div class="gallery-item">
-              <img src="Images/VR/figure1.png" alt="Figure 1">
-
-          </div>
-          <div class="gallery-item">
-              <img src="Images/VR/figure3.png" alt="Figure 2">
-
-          </div>
-          <div class="gallery-item">
-              <img src="Images/VR/figure2.png" alt="Figure 3">
-
-          </div>
-          <!-- Add more gallery items as needed -->
+        <div class="gallery-item">
+          <video class="video-item" src="Images/VR/yellowBathroom.mp4" alt="Yellow Bathroom" controls autoplay></video>
+        </div>
+        <div class="gallery-item">
+          <img src="Images/VR/figure1.png" alt="Figure 1" />
+        </div>
+        <div class="gallery-item">
+          <img src="Images/VR/figure3.png" alt="Figure 2" />
+        </div>
+        <div class="gallery-item">
+          <img src="Images/VR/figure2.png" alt="Figure 3" />
+        </div>
+        <!-- Add more gallery items as needed -->
       </div>
-  </div>
+    </div>
 
+    
+    <!-- INTERMEDIA PAGE ---------------------------------------------------------------------------->
+    <div id="interPageContent">
+      <div class="gallery-container">
+        <div class="gallery-item">
+          <video class="video-item" src="Images/Intermedia/CloudsVid.mp4" alt="In the Clouds" controls autoplay></video>
+        </div>
+        <div class="gallery-item">
+          <img src="Images/Intermedia/InTheClouds.jpg" alt="In the Clouds Image" />
+        </div>
+        <div class="gallery-item">
+          <img src="Images/Intermedia/Nexus.png" alt="Nexus" />
+        </div>
+        <div class="gallery-item">
+          <img src="Images/Intermedia/Processing.jpg" alt="Processing the Body" />
+        </div>
+        <!-- Add more gallery items as needed -->
+      </div>
+    </div>
+
+
+    <!-- INSTALLATION PAGE ---------------------------------------------------------------------------->
+         <!-- INTERMEDIA PAGE ---------------------------------------------------------------------------->
+    <div id="installPageContent">
+      <div class="gallery-container">
+        <div class="gallery-item">
+          <video class="video-item" src="Images/Installation/domeVid.mp4" alt="Dome Video" controls autoplay></video>
+        </div>
+        <div class="gallery-item">
+          <img src="Images/Installation/domeImg.jpg" alt="Dome Image" />
+        </div>
+        <div class="gallery-item">
+          <video src="Images/Installation/TheTransaction.MP4" alt="The Transaction Video" controls autoplay></video>
+        </div>
+        <!-- Add more gallery items as needed -->
+      </div>
+    </div>
   </body>
 </html>
