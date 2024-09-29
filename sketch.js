@@ -35,6 +35,7 @@ let triggerInteraction = false;
 //HOME PAGE HEADER
 let arrow;
 let profileVid; //ai video of me
+let toggleVid = false; //toggle video
 let container; //main html element
 let loadVideo = false;//need to wait for user interaction for video to load
 let videoLoaded = false; //video loaded
@@ -156,7 +157,7 @@ function setup() {
   vidX = globeScale * 0.05;
   vidY = globeScale * 0.03;
   vidSize = globeScale * 0.2;
-
+  
   homeHeader();
 
   //ABOUT PAGE -------------------------------------------------------
@@ -210,13 +211,6 @@ function draw() {
   //HOME PAGE ------------------------------
   if (homePageOn) {
 
-    //TURN OFF OTHER VIDEOS ---------------------
-    //PAUSE OTHER VIDEOS
-    let videos = selectAll('#vrPageContent video, #interMediaContent video , #installPageContent video');
-    videos.forEach(video => {
-      video.pause();
-    });
-
     //PROFILE VIDEO ---------------------------
     if (loadVideo) {
       profileVid = createVideo(["Video/AI Profile Pic.mp4"]);
@@ -224,7 +218,7 @@ function draw() {
       loadVideo = false;
     }
 
-    if (videoLoaded && homePageOn) {
+    if (videoLoaded) {
       showVideo();
     }
 
@@ -256,12 +250,12 @@ function draw() {
       }
     }
 
-    //SHOW BANNER ----------------------------------------------------------------
-    if(showBannerOn){
-    showBanner();
-    } else if(textX <= - startX) {
-      showBannerOn = false; //turn off banner
-    }
+    // //SHOW BANNER ----------------------------------------------------------------
+    // if(showBannerOn){
+    // showBanner();
+    // } else if(textX <= - startX) {
+    //   showBannerOn = false; //turn off banner
+    // }
 
   } else {
     c += 0.1;
@@ -325,6 +319,8 @@ function draw() {
 
   //console.log(loadVideo, videoLoaded);
 
+  console.log(homePageOn);
+
 }
 
 function mousePressed() {
@@ -338,6 +334,13 @@ function mousePressed() {
   }
 
 
+}
+
+function resize() {
+  let w = windowWidth;
+  let h = windowHeight;
+  resizeCanvas(w, h);
+  globeScale = min(width, height);
 }
 
 //BANNER -----------------------------------------------------------------------
@@ -387,5 +390,4 @@ function comingSoon() {
   textSize(globeScale * 0.1);
   text('Coming Soon', width / 2, height / 2);
 }
-
 

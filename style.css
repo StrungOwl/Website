@@ -4,72 +4,73 @@ vw = viewport width
 this is how you make things scalable
 */
 
-html, body {
-    padding: 0;
-    font-family: 'Space Grotesk', sans-serif;
-  }
-  canvas {
-    display: block;
-    margin: 0;
-  }
+html,
+body {
+  padding: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+canvas {
+  display: block;
+  margin: 0;
+}
 
-  /* VR PAGE ---------------------------------------------------------------------*/
-  #vrPageContent, #interPageContent, #installPageContent {
-    display: none;
-    position: relative;
-    overflow-y: auto;
-    height: 100vh; /* Set the height to the full viewport height */
-    z-index: 2;
+/* VR PAGE ---------------------------------------------------------------------*/
+#vrPageContent,
+#interPageContent,
+#installPageContent {
+  display: none;
+  position: relative;
+  overflow-y: auto;
+  height: 100vh; /* Set the height to the full viewport height */
+  z-index: 2;
+  margin-left: 10vw;
 }
 
 .gallery-container {
-    display: flex;
-    flex-direction: row; 
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
 }
 
 .gallery-item {
-    margin: 20px;
-    border: 2vh solid #000; /* Frame border color */
-    border-radius: 3vh;
-    padding: 0px;
-    background-color: #fff; /* Frame color */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1),
-                inset 0px 0 20px rgba(0, 0, 0, 0.5); /* Optional shadow for better visual */
+  margin: 20px;
+  border: 2vh solid #000; /* Frame border color */
+  border-radius: 3vh;
+  padding: 0px;
+  background-color: #000000; /* Frame color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0px 0 20px rgba(0, 0, 0, 0.5); /* Optional shadow for better visual */
+  width: auto; /* Set the width to 30% of the viewport width */
+  height: 50vh; /* Set the height to 30% of the viewport height */
+  overflow: hidden;
 }
 
 .gallery-item img {
-    max-width: 100%;
-    border-radius: 1vh;
-    height: auto;
-    display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Scale the image to cover the frame */
+  border-radius: 1vh;
+  height: 100%; /* centers in the gallery item frame*/
+  display: block;
 }
 
 .gallery-item img:hover {
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
 }
 
-.gallery-item video {
-    max-width: 100%;
-    border-radius: 1vh;
-    height: auto;
-    display: block;
+iframe{
+   width: 50vw;
+   height: 50vh;
 }
 
-.gallery-item video:hover {
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
+p {
+  color: white;
+  font-size: 2vh;
+  text-align: center;
 }
 
- 
-  
-    
 
 
 
-
-
-  

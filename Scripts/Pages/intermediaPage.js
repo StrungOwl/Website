@@ -1,3 +1,5 @@
+
+
 function interMediaPage() {
     canvas1.position(0, 0); // Set the position of the canvas to the top left corner
     canvas1.style("z-index", "1"); // Set a high z-index value
@@ -10,19 +12,10 @@ function interMediaPage() {
     // Attach mousePressed event to each gallery item
     galleryItems.forEach(item => {
         item.mousePressed(function () {
-            let media = this.elt.querySelector('img, video'); // Get the image element within the clicked gallery item
-            makePhotoBig = !makePhotoBig;
-            resizePhoto(media, makePhotoBig);
-        });
-
-        //STOP VIDEOS THAT ARE NOT ON PAGE
-
-        let videos = selectAll('#vrPageContent video, #installPageContent video');
-        videos.forEach(video => {
-            video.pause();
-            if (profileVid) {
-                profileVid.pause();
-            }
+            let media = this.elt.querySelector('img'); // Get the image element within the clicked gallery item
+           makePhotoBig = !makePhotoBig;
+           resizePhoto(media, makePhotoBig);
+           
         });
 
 
@@ -43,6 +36,7 @@ function resizePhoto(media, makeBig) {
         media.addEventListener('mouseover', function () {
             media.style.opacity = 0.3;
             media.style.transition = 'opacity 0.3s ease';
+
         });
 
         media.addEventListener('mouseout', function () {

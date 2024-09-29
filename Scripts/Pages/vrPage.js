@@ -10,23 +10,18 @@ function vrPage() {
     // Attach mousePressed event to each gallery item
     galleryItems.forEach(item => {
         item.mousePressed(function () {
-            let media = this.elt.querySelector('img, video'); // Get the image element within the clicked gallery item
+            let media = this.elt.querySelector('img'); // Get the image element within the clicked gallery item
             makePhotoBig = !makePhotoBig;
             resizePhoto(media, makePhotoBig);
             });
 
-            //STOP VIDEOS THAT ARE NOT ON PAGE
-            let videos = selectAll('#interMediaContent video, #installPageContent video');
-            videos.forEach(video => {
-                video.pause(); 
-                if(profileVid){
-                profileVid.pause(); 
-                }
-            });
+
             
     });
 
-}
+   
+
+ }
 
 function resizePhoto(media, makeBig) {
     
