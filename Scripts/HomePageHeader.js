@@ -61,6 +61,23 @@ function homeHeader() {
 
   });
 
+
+}
+
+function showTextVid(){
+  let wordsX = vidX + vidSize / 2;
+      let wordsY = vidY + vidSize / 2;
+      let offset = globeScale * 0.01;
+      fill(50, 0.2);
+      circle(wordsX, wordsY, vidSize * 0.9);
+      fill(0);
+      stroke(0);
+      strokeWeight(globeScale * 0.002);
+      textLeading(globeScale * 0.034);
+      textAlign(CENTER, CENTER);
+      textSize(globeScale * 0.03);
+      text("Meet\nthe\nArtist", wordsX - offset, wordsY);
+      image(arrow, vidX + vidSize * 0.75, wordsY, globeScale * 0.05, globeScale * 0.05);
 }
 
 showVideo = () => {
@@ -77,11 +94,12 @@ showVideo = () => {
         profileVid.loop();
       });
       profileVid.mouseOver(() => {
+        if(homePageOn){
         profileVid.loop();
+        }
       });
       profileVid.mouseOut(() => {
         profileVid.pause();
       });
-    
 
 }
