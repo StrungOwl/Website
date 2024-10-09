@@ -19,13 +19,13 @@ function homePageInteraction() {
   // Check if all dots are offscreen
   areAllDotsOffscreen(dots);
   //if they are off screen do something
-  if (areAllDotsOffscreen(dots)) {
-    console.log("All dots are offscreen");
-    fractalOn = true;
-  } else {
-    console.log("Some dots are still onscreen");
-    fractalOn = false;
-  }
+  // if (areAllDotsOffscreen(dots)) {
+  //   console.log("All dots are offscreen");
+  //   fractalOn = true;
+  // } else {
+  //   console.log("Some dots are still onscreen");
+  //   fractalOn = false;
+  // }
   
   //top border
   fill(255);
