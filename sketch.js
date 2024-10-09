@@ -35,7 +35,6 @@ let triggerInteraction = false;
 //HOME PAGE HEADER
 let arrow;
 let profileVid; //ai video of me
-let toggleVid = false; //toggle video
 let container; //main html element
 let loadVideo = false;//need to wait for user interaction for video to load
 let videoLoaded = false; //video loaded
@@ -97,6 +96,7 @@ let textSpacing
 //HOME BUTTON
 let homeIcon;
 let c = 0;
+let homeButtonPressed = false;
 
 //BANNER
 let bannerTextSize, textLength; //the size and length 
@@ -210,6 +210,7 @@ function draw() {
 
   //HOME PAGE ------------------------------
   if (homePageOn) {
+
 
     //PROFILE VIDEO ---------------------------
     if (loadVideo) {
@@ -345,29 +346,29 @@ function resize() {
 
 //BANNER -----------------------------------------------------------------------
 
-function showBanner() {
+// function showBanner() {
 
 
-  canvas1.position(0, 0); // Set the position of the canvas to the top left corner
-  canvas1.style("z-index", "1"); // Set a high z-index value
+//   canvas1.position(0, 0); // Set the position of the canvas to the top left corner
+//   canvas1.style("z-index", "1"); // Set a high z-index value
 
-  //top border
-  noStroke();
-  fill(255, 0.1);
-  rect(0, 0, width, rectH);
+//   //top border
+//   noStroke();
+//   fill(255, 0.1);
+//   rect(0, 0, width, rectH);
 
-  textAlign(CENTER, CENTER);
-  textSize(bannerTextSize);
-  fill(0);
-  text(bannerText, textX, rectH / 2);
+//   textAlign(CENTER, CENTER);
+//   textSize(bannerTextSize);
+//   fill(0);
+//   text(bannerText, textX, rectH / 2);
 
-  textX -= textSpeed;
-  if (textX <= - startX) {
-    textX = startX;
-  }
+//   textX -= textSpeed;
+//   if (textX <= - startX) {
+//     textX = startX;
+//   }
 
 
-}
+// }
 
 //COMING SOON -------------------------------------------------------------------
 

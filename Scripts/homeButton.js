@@ -12,6 +12,9 @@ function backButton() {
   
     if(d < backSize && mouseIsPressed){
 
+        //Keep video from playing immediately 
+        homeButtonPressed = true;
+
       interMediaOn = false;
       aboutOn = false;
       exhibitionsOn = false;

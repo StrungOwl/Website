@@ -84,6 +84,14 @@ showVideo = () => {
     //HEADER VIDEO -----------------
 
     //parent vid to main html element so it shows at top of screen
+
+    if(homeButtonPressed){
+
+      setTimeout(() => {
+        homeButtonPressed = false;
+      }, 3000); //delay to prevent vid from playing too soon. 
+
+    }
  
       profileVid.size(vidSize, vidSize);
       profileVid.position(vidX, vidY);
@@ -94,7 +102,7 @@ showVideo = () => {
         profileVid.loop();
       });
       profileVid.mouseOver(() => {
-        if(homePageOn){
+        if(homePageOn && !homeButtonPressed){
         profileVid.loop();
         }
       });
