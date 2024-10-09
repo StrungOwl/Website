@@ -14,14 +14,18 @@ function installationPage() {
             makePhotoBig = !makePhotoBig;
             resizePhoto(media, makePhotoBig);
         });
-
-  
     });
 
-<<<<<<< HEAD
+    //IFRAME CONTENT
+    if(!iFrameTriggered){
+        if(findIframe){
+           iframeInstall1.attribute('src', 'https://www.youtube.com/embed/Bm2-s54ozb4?si=0ahcYPtuz2yvotyH&amp;start=2');
+           iframeInstall2.attribute('src', 'https://www.youtube.com/embed/rbEcfnMmfG4?si=cHu0dcsEosY79Mqk');
+           iFrameTriggered = true; 
+        }
+    }
 
-=======
->>>>>>> parent of 38c8d5e (Hide iFrame Source)
+
  }
 
 function resizePhoto(media, makeBig) {
