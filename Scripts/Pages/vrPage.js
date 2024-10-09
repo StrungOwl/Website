@@ -15,15 +15,9 @@ function vrPage() {
             resizePhoto(media, makePhotoBig);
             });
 
+
             
     });
-
-if(!iFrameTriggered){
-    if(findIframe){
-       iframeVR.attribute('src', 'https://www.youtube.com/embed/aqmPfRfcb2g?si=TX0lWdJp7poGBRqe&amp;start=1');
-       iFrameTriggered = true; 
-    }
-}
 
    
 

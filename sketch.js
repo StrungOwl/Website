@@ -53,16 +53,12 @@ let fig1Size, fig2Size, fig3Size; //VR image sizes
 let dist1; //figure in flowers distance
 let makePhotoBig = false; //make photo big
 let vrPageContent, galleryItem; //HTML content
-let findIframe = false; //find iframe in vr page
-let iFrameTriggered = false; //iframe triggered
-let iframeVR; //video content
 
 //INTERMEDIA PAGE
 let interPageContent; //HTML content
 
 //INSTALL PAGE
 let installPageContent; //HTML content
-let iframeInstall1, iframeInstall2; //video content
 
 //BUTTONS ON HOME PAGE
 let buttons = [];
@@ -184,16 +180,12 @@ function setup() {
   fig2.resize(fig2Size, 0);
   vrPageContent = select('#vrPageContent');
   galleryItem = selectAll('.gallery-item'); //need select all
-  iframeVR = select('#vrPageContent iframe');
-
 
   //INTERMEDIA PAGE ----------------------------------------------------------
   interPageContent = select('#interPageContent');
 
   //INSTALLATION PAGE 
   installPageContent = select('#installPageContent');
-  iframeInstall1 = select('#installPageContent #vid1');
-  iframeInstall2 = select('#installPageContent #vid2');
 
   //HAM MENU -------------------
   //x, y, size
@@ -300,15 +292,11 @@ function draw() {
   //VR PAGE -------------------
   if (vrOn) {
     homePageOn = false;
-    findIframe = true; 
     vrPage();
     vrPageContent.style('display', 'flex');
 
   } else {
     vrPageContent.style('display', 'none');
-    iframeVR.attribute('src', '');
-    findIframe = false; 
-    iFrameTriggered = false; // reset flag
   }
 
   //GEN ART PAGE -------------------
@@ -319,17 +307,11 @@ function draw() {
 
   //Installation PAGE -------------------
   if (installationOn) {
-    homePageOn = false; //put this in the function of the page too 
-    findIframe = true;
+    homePageOn = false;
     installationPage();
     installPageContent.style('display', 'flex');
   } else {
     installPageContent.style('display', 'none');
-    iframeInstall1.attribute('src', '');
-    iframeInstall2.attribute('src', '');
-    findIframe = false;
-    iFrameTriggered = false; // reset flag
-    homePageOn = true;  //reset home page here!!!! 
   }
 
   // hamMenu1.displayHam();

@@ -14,9 +14,14 @@ function installationPage() {
             makePhotoBig = !makePhotoBig;
             resizePhoto(media, makePhotoBig);
         });
+
+  
     });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 38c8d5e (Hide iFrame Source)
  }
 
 function resizePhoto(media, makeBig) {
