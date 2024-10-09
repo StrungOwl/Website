@@ -1,6 +1,6 @@
 function pushHexagons(){ //In setup function
   // Create multiple Dots objects and add them to the array
-  numShapes = random(10, 800);
+  numShapes = random(10, 500);
   for (let i = 0; i < numShapes; i++) {
     dots.push(new Dots(random(width), random(height)));
   }

@@ -87,11 +87,13 @@ let aboutPageY;
 let num; //offset w and h
 let bevel; //bevel for text box
 let blueX;
-let blueY
-let blueW
-let blueH
-let txtSize
-let textSpacing
+let blueY;
+let blueW;
+let blueH;
+let txtSize;
+let textSpacing;
+let statement; //the text on page
+let disclaimerOn = true; //show disclaimer
 
 //HOME BUTTON
 let homeIcon;
@@ -165,9 +167,8 @@ function setup() {
   bevel = globeScale * 0.01;
   blueX = width / 2;
   blueY = height / 2;
-  blueW = width * 0.8;
-  blueH = globeScale * 0.8;
   aboutPageY = blueH + num * 1.4; //about page text START POS
+  //aboutPageY = blueY; 
   // Calculate the top and bottom of the scroll bar
   scrollY = blueY - blueH * 0.5;
   scrollBarTop = blueY - blueH * 0.35;
@@ -204,13 +205,10 @@ function setup() {
 
 function draw() {
 
-
-
   //fractalOn = true; 
 
   //HOME PAGE ------------------------------
   if (homePageOn) {
-
 
     //PROFILE VIDEO ---------------------------
     if (loadVideo) {
@@ -242,6 +240,12 @@ function draw() {
       showTextVid();
     }
 
+     //DISCLAIMER TEXT ----------------------------------------------
+     if(disclaimerOn){
+      aboutPage(); 
+    }
+
+
     if (cursorHand) {
       if (mouseY >= rectH && !fractalOn) {
         noCursor();
@@ -262,6 +266,7 @@ function draw() {
     c += 0.1;
     c = c % 360;
     fractalOn = false;//turn off when home page is off
+    disclaimerOn = false; //turn off disclaimer
   }
 
   // fractalOn = true; 
